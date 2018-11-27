@@ -1,16 +1,25 @@
 import React from 'react';
 import '../stylesheets/Area.css'
+import HostList from './HostList'
 
-const Area = () => (
+const Area = (props) => {
+  function toTitleCase(str) {
+        return str.replace(
+            /\w\S*/g,
+            function(txt) {
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            }
+        );
+    }
 
-  <div className='area' id={/* Pass in the area name here to make sure this is styled correctly */}>
-    <h3 className='labels'>{/* Don't just pass in the name from the data...clean that thing up */}</h3>
+  return (
 
-    {/* See Checkpoint 1 item 2 in the Readme for a clue as to what goes here */}
-
-  </div>
-
-)
+    <div className='area' id={props.areaObj.name}>
+      <h3 className='labels'>{toTitleCase(props.areaObj.name.replace("_"," "))}</h3>
+      <HostList />
+    </div>
+  )
+}
 
 Area.propTypes = {
   hosts: function(props, propName, componentName){
